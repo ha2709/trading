@@ -16,9 +16,11 @@ symbol = 'DIA'
 # df = yf.download(symbol, start=start, end=end)
 # df.to_csv('dji_30.csv')
 df = pd.read_csv('dji_30.csv', parse_dates=True, index_col=0, date_parser=lambda x: pd.to_datetime(x, format='%Y-%m-%d'))
-df['100ma'] = df['Adj Close'].rolling(window=100, min_periods = 0).mean()
+ 
 # Calculate 20-day moving average
+df['5ma'] = df['Adj Close'].rolling(window=5).mean()
 df['20ma'] = df['Adj Close'].rolling(window=20).mean()
+df['50ma'] = df['Adj Close'].rolling(window=50).mean()
 # Resample to 10-day intervals for candlestick chart
 df_ohlc = df['Adj Close'].resample('10D').ohlc()
 df_volume = df['Volume'].resample('10D').sum()
@@ -34,7 +36,9 @@ fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(10, 8))
 candlestick_ohlc(ax1, df_ohlc.values, width=2, colorup='g')
 
 # Plot 20-day moving average
-ax1.plot(df.index, df['20ma'], label='20-day MA', color='orange')
+ax1.plot(df.index, df['5ma'], label='50-day MA', color='blue')
+ax1.plot(df.index, df['20ma'], label='20-day MA', color='green')
+ax1.plot(df.index, df['50ma'], label='50-day MA', color='red')
 ax1.legend(loc='upper left')
 
 # Format x-axis
