@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+stock_dfs/
 # Distribution / packaging
 .Python
 build/
@@ -31,7 +31,7 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-
+sp500tickers.pickle
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt

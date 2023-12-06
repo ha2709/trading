@@ -10,7 +10,12 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 from collections import Counter
-
+from sklearn import svm,  neighbors
+# from sklearn.model_selection import cross_validate
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 
 matplotlib.use(
     "TkAgg"
@@ -24,12 +29,11 @@ symbol = "AAPL"
 # df.to_csv('dji_30.csv')
 df = pd.read_csv(
     "dji_30.csv",
- 
 )
 df.set_index("Date", inplace=True)
 df.rename(columns={"Adj Close": "AAPL"}, inplace=True)
 
- 
+
 df.drop(["Open", "High", "Low", "Close", "Volume"], axis=1, inplace=True)
 main_df = pd.DataFrame()
 if main_df.empty:
@@ -110,7 +114,7 @@ new_df = pd.read_csv("sp500_joined_closes.csv", index_col=0)
 new_df.fillna(0, inplace=True)
 # print(113, new_df['AAPL'][2])
 # Loop to create new columns
- 
+
 ticker = "AAPL"
 for i in range(1, hm_days + 1):
     # column_name = f'diff_pct_{i}'
@@ -121,11 +125,11 @@ for i in range(1, hm_days + 1):
 
 new_df.fillna(0, inplace=True)
 
+
 def buy_sell_hold(*args):
     cols = [col for col in args]
-    
+
     requirement = 0.02
- 
 
     for col in cols:
         # print(82, col)
@@ -134,7 +138,6 @@ def buy_sell_hold(*args):
             return 1
         elif col < -requirement:
             return -1
-      
 
     return 0
 
@@ -143,7 +146,7 @@ def buy_sell_hold(*args):
 # Choose the columns you want to use for features
 feature_cols = ["1", "2", "3", "4", "5", "6", "7"]
 
- 
+
 new_df["{}_target".format(ticker)] = list(
     map(
         buy_sell_hold,
@@ -161,14 +164,33 @@ vals = new_df["{}_target".format(ticker)].values.tolist()
 str_vals = [str(i) for i in vals]
 
 print("Data spread", Counter(str_vals))
+new_df.fillna(0, inplace=True)
+new_df = new_df.replace([np.inf, -np.inf], np.nan)
+new_df.dropna(inplace=True)
+df_vals = new_df[ticker].pct_change()
 
-# df_vals = new_df.pct_change()
-# df_vals = df_vals.replace([np.inf, -np.inf], 0)
-# df_vals.fillna(0, inplace=True)
+df_vals =df_vals.replace([np.inf, -np.inf],0)
+#
+df_vals.fillna(0, inplace=True)
+print(166, df_vals)
+X = df_vals.values
+print(177, new_df["{}_target".format(ticker)])
+y = new_df["{}_target".format(ticker)].values
 
-# X = df_vals.values
-# y = np.array(signals)
-
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+# Reshape 'y' to a 2D array
+X_train = np.reshape(X_train, (-1, 1))
+X_test = np.reshape(X_test, (-1, 1))
+y_train = np.reshape(y_train, (-1, 1))
+y_test = np.reshape(y_test, (-1, 1))
+# Reshape to a 2D array
+clf = KNeighborsClassifier(n_neighbors=3)  # You can adjust the number of neighbors
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+print(' predict Spread ', Counter(y_pred))
+# classifier.fit(X_train, y_train)
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy}')
 # return X, y, new_df
 
 
