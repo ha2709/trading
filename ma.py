@@ -14,7 +14,7 @@ from collections import Counter
 matplotlib.use('TkAgg')  # Use 'TkAgg' backend (replace with 'Qt5Agg' or 'Agg' if needed)
 
 start = '2022-01-01'
-end = '2023-12-1'
+end = '2023-12-5'
 
 symbol = 'DIA'
 # df = yf.download(symbol, start=start, end=end)
