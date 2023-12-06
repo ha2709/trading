@@ -33,6 +33,7 @@ df_volume = df['Volume'].resample('10D').sum()
 df_ohlc.reset_index(inplace=True)
 df_ohlc['Date'] = df_ohlc['Date'].map(mdates.date2num)
 df_corr = df.corr()
+ 
 
 
 
@@ -60,57 +61,3 @@ fig.autofmt_xdate()
 plt.tight_layout()
 plt.show()
 # Show the plot
-
-hm_days = 7
-# Loop to create new columns
-for i in range(1, hm_days + 1):
-    df['{}'.format(i)] =  (df['Adj Close'].shift(-i) - df['Adj Close']) / df['Adj Close']
-
-df.fillna(0, inplace=True)
-print(df)
-def buy_sell_hold(*args):
-    cols = [col for col in args]
-    requirement = 0.02
-    signals = []
-
-    for col in cols:
-        print(82, col)
-        for val in col:
-            if val > requirement:
-                signals.append(1)
-            elif val < -requirement:
-                signals.append(-1)
-            else:
-                signals.append(0)
-
-    return signals
-
-
-def extract_featuresets():
-    # Choose the columns you want to use for features
-    feature_cols = ['1', '2', '3', '4', '5', '6', '7']
-    
-    new_df = pd.DataFrame(index=df.index)
-    
-    for col in feature_cols:
-        new_df[col] = (df[col].shift(-int(col)) - df['Adj Close']) / df['Adj Close']
-    
-    new_df.fillna(0, inplace=True)
-    print(new_df)
-
-    signals = buy_sell_hold(*[new_df[col] for col in feature_cols])
-
-    # print(114, signals)
-    print('Data spread', Counter(signals))
-    
-    df_vals = new_df.pct_change()
-    df_vals = df_vals.replace([np.inf, -np.inf], 0)
-    df_vals.fillna(0, inplace=True)
-
-    X = df_vals.values
-    y = np.array(signals)
-
-    return X, y, new_df
-
-extract_featuresets()
-
