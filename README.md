@@ -1,1 +1,23 @@
-## to run code, in terminal `python3 test.py`
+ 
+
+# Prediction on Price of SP 500
+
+This project collect price of stocks in SP 500 lists. It can draw candle stick plot with Moving Average 5 , 20, 50 days
+
+## generate the requirements.txt file by running the following command:
+
+`pip freeze > requirements.txt`
+
+## Project Structure
+
+```plaintext
+project/
+|-- data/
+|   |-- sp500_joined_closes.csv
+|-- services/
+|   |-- __init__.py
+|   |-- signal_generator.py
+|   |-- data_processor.py
+|-- main.py
+|-- README.md
+|-- ...
