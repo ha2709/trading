@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 stock_dfs/
+data_join/
+data/
 # Distribution / packaging
 .Python
 build/
