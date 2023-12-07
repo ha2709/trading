@@ -1,6 +1,7 @@
 from collections import Counter
 import numpy as np
 
+
 class DataProcessor:
     def __init__(self, ticker, signal_generator, hm_days):
         self.ticker = ticker

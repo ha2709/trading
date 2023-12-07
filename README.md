@@ -8,6 +8,22 @@ This project collect price of stocks in SP 500 lists. It can draw candle stick p
 
 `pip freeze > requirements.txt`
 
+`source env/bin/activate`
+
+`pip3 install -r requirements.txt`
+
+## To collect data run 
+
+`python3 collect_data.py`
+
+## to view the plot of moving average run 
+
+`python3 moving_average.py`
+
+### To run prediction with KNeighbor run 
+
+`python main.py`
+
 ## Project Structure
 
 ```plaintext
