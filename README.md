@@ -22,7 +22,7 @@ This project collect price of stocks in SP 500 lists. It can draw candle stick p
 
 ### To run prediction with KNeighbor run 
 
-`python main.py`
+`python main.py AAPL`, it will run with Apple company, change the ticker of the company in the second parameter when running this program. 
 
 ## Project Structure
 

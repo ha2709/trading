@@ -7,6 +7,7 @@ class DataDownloader:
     @staticmethod
     def download_data(tickers, start, end):
         for ticker in tickers:
+            ticker = ticker.replace(" ", "").replace("\n", "")
             print(f"Downloading data for {ticker}")
             if not os.path.exists(f"stock_dfs/{ticker}.csv"):
                 df = yf.download(ticker, start=start, end=end)
