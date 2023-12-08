@@ -14,11 +14,13 @@ This project collect price of stocks in SP 500 lists. It can draw candle stick p
 
 ## To collect data run 
 
-`python3 collect_data.py TSLA` it wil dowload data price of Tesla from 1-1-22 to 12-5-23
+`python3 collect_data.py TSLA` it wil dowload data price of Tesla from 1-1-22 to 12-5-23 and store it in the `stock_dfs` folder 
 
 ## to view the plot of moving average run 
 
-`python3 moving_average.py`
+`python3 moving_average.py TSLA`
+
+It will drawing moving average with Candle stick of TSLA. 
 
 ### To run prediction with KNeighbor run 
 
