@@ -1,6 +1,8 @@
  
 
-# Prediction on Price of SP 500
+# Prediction on Price of SP 500 
+
+It train a k-nearest neighbors classifier and a voting classifier on  input data, and then evaluating the performance on a test set.
 
 This project collect price of stocks in SP 500 lists. It can draw candle stick plot with Moving Average 5 , 20, 50 days
 
@@ -19,6 +21,23 @@ This project collect price of stocks in SP 500 lists. It can draw candle stick p
 ## to view the plot of moving average run 
 
 `python3 moving_average.py TSLA`
+
+
+## Offers line-by-line profiling, Reports memory consumption for each line:
+
+`kernprof -l -v  moving_average.py TSLA`
+
+## To read the file and display the profiling results. Run the following command:
+
+`python -m line_profiler moving_average.py.lprof`
+
+## Redirect the output to a text file for easier analysis:
+
+`python -m line_profiler moving_average.py.lprof > profile_results.txt` 
+
+## Tracks memory usage moving average file 
+
+`python3 -m memory_profiler  moving_average.py TSLA`
 
 It will drawing moving average with Candle stick of TSLA. 
 

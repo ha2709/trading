@@ -6,7 +6,7 @@ from services.resampler import Resampler
 from services.plotter import Plotter
 from services.visualization import Visualization
 
-
+@profile
 def main():
     # Get stock symbol from the terminal
     if len(sys.argv) != 2:
