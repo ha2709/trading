@@ -1,6 +1,13 @@
  
 
-# Prediction on Price of SP 500 
+# Project Summary: Automated Financial Data Analysis and Modeling for S&P 500 Stocks
+
+- Developed a Python script to automatically extract S&P 500 tickers from Wikipedia and download corresponding data from Yahoo Finance.
+- Efficiently stored data in CSV format for ease of analysis.
+- Conducted technical analysis, creating MA 20, MA 50, and candlestick charts to identify market trends.
+- Implemented a machine learning model using Python tools like pandas and scikit-learn to predict stock price movements.
+- Integrated risk management principles into the predictive model to mitigate potential trading risks.
+- Utilized the insights from this analysis to inform algorithmic trading strategy development.
 
 It train a k-nearest neighbors classifier and a voting classifier on  input data, and then evaluating the performance on a test set.
 
@@ -21,6 +28,8 @@ This project collect price of stocks in SP 500 lists. It can draw candle stick p
 ## to view the plot of moving average run 
 
 `python3 moving_average.py TSLA`
+
+``
 
 
 ## Offers line-by-line profiling, Reports memory consumption for each line:
@@ -58,3 +67,10 @@ project/
 |-- main.py
 |-- README.md
 |-- ...
+
+```
+
+`conda activate myenv`
+
+`pypy`
+
